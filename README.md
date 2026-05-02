@@ -6,7 +6,10 @@
 ![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express)
 ![Google AI](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?logo=google)
 ![Tests](https://img.shields.io/badge/Tests-102%20Passed-10b981)
+![Deploy](https://img.shields.io/badge/Cloud_Run-Live-4285F4?logo=googlecloud)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
+### 🌐 [Live Demo → ballotguide-1001633243269.us-central1.run.app](https://ballotguide-1001633243269.us-central1.run.app)
 
 ---
 
@@ -21,6 +24,7 @@
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Setup & Installation](#-setup--installation)
+- [Deployment](#-deployment)
 - [API Reference](#-api-reference)
 - [Testing](#-testing)
 - [Security](#-security)
@@ -134,7 +138,7 @@ User Input → Sanitisation → Context Analysis → AI Processing → Response 
 │  ┌─────────────────────────────────────────────────┐    │
 │  │ Routes                                           │    │
 │  │ /api/assistant  → Gemini AI Chat + Suggestions   │    │
-│  │ /api/election   → Process, Glossary, Quiz        │    │
+│  │ /api/election   → Process, Glossary, Quiz, Facts, Countdown │    │
 │  │ /api/civic      → Elections, Voter Info           │    │
 │  │ /api/accessibility → Translate, TTS              │    │
 │  └─────────────────────────────────────────────────┘    │
@@ -383,6 +387,37 @@ npm run test:unit
 
 # Integration tests only
 npm run test:integration
+```
+
+---
+
+## ☁️ Deployment
+
+BallotGuide is deployed on **Google Cloud Run** — a fully managed serverless container platform.
+
+| | |
+|---|---|
+| **Live URL** | [ballotguide-1001633243269.us-central1.run.app](https://ballotguide-1001633243269.us-central1.run.app) |
+| **Platform** | Google Cloud Run (managed) |
+| **Region** | us-central1 |
+| **Container** | Multi-stage Docker (Alpine, non-root user) |
+| **Scales to zero** | ✅ No cost when idle |
+| **HTTPS** | ✅ Automatic SSL |
+
+### Deploy it yourself
+
+```bash
+# Build the Docker image
+docker build -t us-central1-docker.pkg.dev/YOUR_PROJECT/repo/ballotguide:latest .
+
+# Push to Artifact Registry
+docker push us-central1-docker.pkg.dev/YOUR_PROJECT/repo/ballotguide:latest
+
+# Deploy to Cloud Run
+gcloud run deploy ballotguide \
+  --image=us-central1-docker.pkg.dev/YOUR_PROJECT/repo/ballotguide:latest \
+  --platform=managed --region=us-central1 --allow-unauthenticated --port=8080 \
+  --set-env-vars="NODE_ENV=production,GEMINI_API_KEY=your_key"
 ```
 
 ---

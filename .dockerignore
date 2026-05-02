@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Test & coverage
+coverage/
+tests/
+
+# Dev config
+.env
+.env.*
+!.env.example
+
+# Dev tools
+.eslintrc.json
+.prettierrc
+jest.config.js
+
+# Git
+.git/
+.gitignore
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agent / temp
+.agent/
+CLAUDE.md
+graphify-out/
+
+# Logs
+logs/
+*.log

@@ -15,6 +15,7 @@ coverage/
 # Agent
 .agent/
 CLAUDE.md
+graphify-out/
 
 # IDE
 .vscode/
