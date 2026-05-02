@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BallotGuide — AI-powered interactive election process education assistant. Learn about voter registration, primaries, the Electoral College, and more.">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>BallotGuide — Election Process Education</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
+</head>
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link" id="skip-link">Skip to main content</a>
+
+  <div class="app" id="app">
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="header__inner">
+        <div class="header__logo" aria-label="BallotGuide"><span>🗳️</span> BallotGuide</div>
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+          <button class="nav__btn active" data-page="home" id="nav-home" aria-current="page">Home</button>
+          <button class="nav__btn" data-page="process" id="nav-process">Process</button>
+          <button class="nav__btn" data-page="quiz" id="nav-quiz">Quiz</button>
+          <button class="nav__btn" data-page="glossary" id="nav-glossary">Glossary</button>
+          <button class="nav__btn" data-page="voter-info" id="nav-voter-info">Voter Info</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+
+      <!-- HOME PAGE -->
+      <div class="page" id="page-home">
+        <section class="hero" aria-label="Welcome">
+          <div class="hero__badge">🇺🇸 Powered by Google AI</div>
+          <h1 class="hero__title">Your Guide to the <em>Election Process</em></h1>
+          <p class="hero__subtitle">Understand every step from voter registration to inauguration with our AI-powered interactive assistant.</p>
+          <div class="hero__actions">
+            <button class="btn btn--primary" id="hero-start-btn" aria-label="Start learning about the election process">📚 Start Learning</button>
+            <button class="btn btn--secondary" id="hero-quiz-btn" aria-label="Test your election knowledge">🧠 Take the Quiz</button>
+          </div>
+        </section>
+
+        <!-- Feature Cards -->
+        <section class="section" aria-label="Features">
+          <div class="container">
+            <div class="section__header">
+              <h2 class="section__title">Everything You Need to Know</h2>
+              <p class="section__subtitle">Interactive tools to master the election process</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">📋</div>
+                <h3 class="card__title">Step-by-Step Guide</h3>
+                <p class="card__text">Walk through every phase of the election process with detailed explanations and pro tips.</p>
+              </div>
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">🤖</div>
+                <h3 class="card__title">AI Assistant</h3>
+                <p class="card__text">Ask any election question and get instant, accurate answers powered by Google Gemini.</p>
+              </div>
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">🧠</div>
+                <h3 class="card__title">Knowledge Quiz</h3>
+                <p class="card__text">Test your understanding with interactive quizzes and get detailed explanations.</p>
+              </div>
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">📍</div>
+                <h3 class="card__title">Voter Information</h3>
+                <p class="card__text">Look up real election data and voter info for your address via Google Civic API.</p>
+              </div>
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">🌍</div>
+                <h3 class="card__title">Multi-Language</h3>
+                <p class="card__text">Access content in multiple languages with Google Translate integration.</p>
+              </div>
+              <div class="card" tabindex="0" role="article">
+                <div class="card__icon">🔊</div>
+                <h3 class="card__title">Text-to-Speech</h3>
+                <p class="card__text">Listen to content read aloud with Google Cloud TTS for enhanced accessibility.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- PROCESS PAGE -->
+      <div class="page" id="page-process" style="display:none">
+        <section class="section">
+          <div class="container">
+            <!-- Timeline View -->
+            <div id="process-timeline">
+              <div class="section__header">
+                <h2 class="section__title">The Election Process</h2>
+                <p class="section__subtitle">Click any phase to explore it in detail</p>
+              </div>
+              <div class="a11y-bar">
+                <button class="btn btn--sm btn--secondary" id="tts-btn" aria-label="Read content aloud">🔊 Listen</button>
+                <select id="lang-select" class="btn btn--sm btn--secondary" aria-label="Select language" style="appearance:auto;padding-right:32px">
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="zh">中文</option>
+                  <option value="hi">हिन्दी</option>
+                  <option value="fr">Français</option>
+                  <option value="ar">العربية</option>
+                  <option value="ko">한국어</option>
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="tl">Tagalog</option>
+                </select>
+              </div>
+              <div class="timeline" id="timeline-container" role="list" aria-label="Election process phases"></div>
+            </div>
+
+            <!-- Phase Detail View -->
+            <div id="process-detail" class="process-detail">
+              <button class="btn btn--secondary btn--sm back-btn" id="back-to-timeline" aria-label="Go back to timeline">← Back to Timeline</button>
+              <div id="phase-content"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- QUIZ PAGE -->
+      <div class="page" id="page-quiz" style="display:none">
+        <section class="section">
+          <div class="container" style="max-width:700px">
+            <div class="section__header">
+              <h2 class="section__title">Test Your Knowledge</h2>
+              <p class="section__subtitle">See how well you understand the election process</p>
+            </div>
+            <div class="card" id="quiz-container">
+              <div id="quiz-start" style="text-align:center;padding:20px">
+                <p style="font-size:1.1rem;margin-bottom:20px;color:var(--text-secondary)">Ready to test your election knowledge? Answer 12 questions about the US election process.</p>
+                <button class="btn btn--primary" id="start-quiz-btn" aria-label="Start quiz">🚀 Start Quiz</button>
+              </div>
+              <div id="quiz-active" style="display:none"></div>
+              <div id="quiz-result" style="display:none"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- GLOSSARY PAGE -->
+      <div class="page" id="page-glossary" style="display:none">
+        <section class="section">
+          <div class="container">
+            <div class="section__header">
+              <h2 class="section__title">Election Glossary</h2>
+              <p class="section__subtitle">Key terms you need to know</p>
+            </div>
+            <input type="search" class="glossary__search" id="glossary-search" placeholder="🔍  Search terms..." aria-label="Search election glossary">
+            <div class="glossary__grid" id="glossary-container" role="list"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- VOTER INFO PAGE -->
+      <div class="page" id="page-voter-info" style="display:none">
+        <section class="section">
+          <div class="container">
+            <div class="section__header">
+              <h2 class="section__title">Voter Information Lookup</h2>
+              <p class="section__subtitle">Find real election data for your address using Google Civic API</p>
+            </div>
+            <div class="voter-info__search">
+              <input type="text" class="voter-info__input" id="voter-address" placeholder="Enter your address (e.g., 1600 Pennsylvania Ave, Washington DC)" aria-label="Enter your address">
+              <button class="btn btn--primary" id="voter-search-btn" aria-label="Search voter information">🔍 Search</button>
+            </div>
+            <div class="voter-info__result" id="voter-result"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <p>BallotGuide © 2026 — Nonpartisan election education powered by <a href="https://ai.google.dev" target="_blank" rel="noopener">Google AI</a>, <a href="https://developers.google.com/civic-information" target="_blank" rel="noopener">Google Civic API</a> & <a href="https://cloud.google.com/translate" target="_blank" rel="noopener">Google Cloud</a></p>
+      <p style="margin-top:4px">This tool is for educational purposes only. Verify all information with your local election office.</p>
+    </footer>
+  </div>
+
+  <!-- Chat FAB -->
+  <button class="chat-fab" id="chat-fab" aria-label="Open AI assistant chat">💬</button>
+
+  <!-- Chat Panel -->
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="BallotGuide AI Assistant" aria-modal="true">
+    <div class="chat__header">
+      <h3>🗳️ BallotGuide Assistant</h3>
+      <button class="chat__close" id="chat-close" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat__messages" id="chat-messages" role="log" aria-live="polite"></div>
+    <div class="chat__suggestions" id="chat-suggestions"></div>
+    <div class="chat__input-area">
+      <input type="text" class="chat__input" id="chat-input" placeholder="Ask about elections..." aria-label="Type your question" autocomplete="off">
+      <button class="chat__send" id="chat-send" aria-label="Send message">➤</button>
+    </div>
+  </div>
+
+  <script src="/js/utils/api.js"></script>
+  <script src="/js/utils/dom.js"></script>
+  <script src="/js/components/chatbot.js"></script>
+  <script src="/js/components/timeline.js"></script>
+  <script src="/js/components/quiz.js"></script>
+  <script src="/js/components/glossary.js"></script>
+  <script src="/js/components/voterInfo.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

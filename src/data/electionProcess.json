@@ -1,0 +1,272 @@
+{
+  "phases": [
+    {
+      "id": "voter-registration",
+      "title": "Voter Registration",
+      "icon": "📋",
+      "shortDescription": "Register to vote and check your eligibility",
+      "description": "Before you can participate in any election, you must be registered to vote. Registration requirements vary by state, but generally you need to be a US citizen, at least 18 years old by Election Day, and a resident of the state where you're registering.",
+      "steps": [
+        {
+          "title": "Check Your Eligibility",
+          "description": "You must be a US citizen, at least 18 years old (some states allow 17-year-olds to register if they'll be 18 by Election Day), and meet your state's residency requirements.",
+          "tip": "Use vote.gov to find your state-specific requirements."
+        },
+        {
+          "title": "Gather Required Documents",
+          "description": "Most states require a valid government-issued ID (driver's license or state ID). Some states also accept the last four digits of your Social Security Number.",
+          "tip": "Check your state's specific ID requirements — they vary significantly."
+        },
+        {
+          "title": "Choose Your Registration Method",
+          "description": "You can register online (available in 40+ states), by mail using the National Voter Registration Form, or in person at your local election office, DMV, or other designated agencies.",
+          "tip": "Online registration is fastest — most states process it within 48 hours."
+        },
+        {
+          "title": "Submit Before the Deadline",
+          "description": "Most states require registration 15–30 days before Election Day. Some states offer same-day registration at polling places.",
+          "tip": "Don't wait until the last minute! Register as soon as you're eligible."
+        },
+        {
+          "title": "Verify Your Registration",
+          "description": "After submitting, verify your registration status through your state's Secretary of State website or through vote.gov.",
+          "tip": "Check your registration status periodically, especially before major elections."
+        }
+      ],
+      "keyDates": {
+        "ongoing": "Registration is open year-round in most states",
+        "deadline": "Typically 15–30 days before Election Day (varies by state)"
+      },
+      "resources": [
+        { "name": "Vote.gov", "url": "https://vote.gov" },
+        { "name": "National Voter Registration Form", "url": "https://www.eac.gov/voters/national-mail-voter-registration-form" }
+      ]
+    },
+    {
+      "id": "primaries-caucuses",
+      "title": "Primaries & Caucuses",
+      "icon": "🗳️",
+      "shortDescription": "Help select your party's candidate",
+      "description": "Primaries and caucuses are the first major stage of the presidential election process. They determine which candidates will represent each political party in the general election. States choose to hold either a primary election or a caucus, each with different rules.",
+      "steps": [
+        {
+          "title": "Understand the Difference",
+          "description": "Primaries are state-run elections where voters cast secret ballots. Caucuses are party-run meetings where participants openly discuss and vote for candidates. Most states now use primaries.",
+          "tip": "Only about 10 states still use caucuses — check which system your state uses."
+        },
+        {
+          "title": "Know Your Primary Type",
+          "description": "Open primaries let any registered voter participate regardless of party. Closed primaries require voters to be registered with a specific party. Semi-closed primaries let unaffiliated voters choose a party ballot on Election Day.",
+          "tip": "If your state has closed primaries, make sure you're registered with the party whose primary you want to vote in."
+        },
+        {
+          "title": "Learn About Delegates",
+          "description": "When you vote in a primary, you're actually voting for delegates who will represent your candidate at the national convention. Delegates can be awarded proportionally or winner-take-all, depending on party and state rules.",
+          "tip": "The 'magic number' of delegates needed to win the nomination changes each election cycle."
+        },
+        {
+          "title": "Find Your Polling Place",
+          "description": "Locate your assigned polling place using your state's election website or tools like Google Civic Information. Bring required identification and arrive prepared.",
+          "tip": "Hours vary — some primaries have extended hours or early voting options."
+        }
+      ],
+      "keyDates": {
+        "start": "February of election year (Iowa traditionally first)",
+        "end": "June of election year",
+        "superTuesday": "First Tuesday in March — multiple states vote simultaneously"
+      },
+      "resources": [
+        { "name": "FEC Primary Election Information", "url": "https://www.fec.gov/introduction-campaign-finance/election-and-voting-information/" },
+        { "name": "USA.gov Primary Information", "url": "https://www.usa.gov/election" }
+      ]
+    },
+    {
+      "id": "national-conventions",
+      "title": "National Conventions",
+      "icon": "🎪",
+      "shortDescription": "Parties officially nominate their candidates",
+      "description": "After the primary and caucus season, each major political party holds a national convention. These multi-day events serve as the official forum where delegates formally nominate the party's presidential and vice-presidential candidates.",
+      "steps": [
+        {
+          "title": "Delegates Gather",
+          "description": "Delegates won during primaries and caucuses travel to the convention city. Superdelegates (in the Democratic Party) and at-large delegates also participate.",
+          "tip": "Convention cities are selected years in advance and generate significant economic impact."
+        },
+        {
+          "title": "Platform Adopted",
+          "description": "The party drafts and votes on its official platform — a document outlining policy positions and priorities for the upcoming term.",
+          "tip": "The platform reflects compromises between different factions within the party."
+        },
+        {
+          "title": "Nomination Vote",
+          "description": "Delegates cast their votes state-by-state in a roll call. The candidate who secures a majority of delegate votes wins the nomination. In rare cases, a contested convention may occur if no candidate has a majority.",
+          "tip": "The last truly contested convention was in 1952 — most are now ceremonial."
+        },
+        {
+          "title": "Acceptance Speech",
+          "description": "The newly nominated candidate delivers an acceptance speech, officially launching their general election campaign and unifying the party.",
+          "tip": "Acceptance speeches historically provide a polling boost known as the 'convention bump.'"
+        }
+      ],
+      "keyDates": {
+        "period": "July – August of election year",
+        "duration": "Typically 4 days each"
+      },
+      "resources": [
+        { "name": "Democratic National Committee", "url": "https://democrats.org" },
+        { "name": "Republican National Committee", "url": "https://gop.com" }
+      ]
+    },
+    {
+      "id": "general-election-campaign",
+      "title": "General Election Campaign",
+      "icon": "📢",
+      "shortDescription": "Candidates campaign nationwide for votes",
+      "description": "After the conventions, the general election campaign begins in earnest. The two major party nominees — along with any significant third-party or independent candidates — compete for votes across all 50 states and US territories.",
+      "steps": [
+        {
+          "title": "Campaign Strategy",
+          "description": "Candidates focus on 'swing states' — states where the outcome is uncertain. They hold rallies, run advertisements, and build ground operations in key battleground areas.",
+          "tip": "Campaign spending often exceeds billions of dollars across all candidates."
+        },
+        {
+          "title": "Presidential Debates",
+          "description": "Traditionally, three presidential debates and one vice-presidential debate are held. These nationally televised events allow candidates to present their positions and challenge opponents directly.",
+          "tip": "Debates can significantly influence undecided voters and shift polls."
+        },
+        {
+          "title": "Early and Absentee Voting",
+          "description": "Many states allow voting before Election Day through early voting periods or absentee/mail-in ballots. Each state has its own rules and deadlines.",
+          "tip": "Early voting has grown significantly — in recent elections, over 50% of votes were cast before Election Day."
+        },
+        {
+          "title": "Get Informed",
+          "description": "Research candidates' positions, review nonpartisan voter guides, and understand the ballot measures in your area. Make an informed decision before heading to the polls.",
+          "tip": "Sites like BallotReady, Vote Smart, and your local League of Women Voters chapter provide excellent nonpartisan guides."
+        }
+      ],
+      "keyDates": {
+        "campaignStart": "After national conventions (August/September)",
+        "debateSeason": "September – October",
+        "earlyVoting": "Varies by state (typically begins 30–45 days before Election Day)"
+      },
+      "resources": [
+        { "name": "Commission on Presidential Debates", "url": "https://www.debates.org" },
+        { "name": "Vote Smart", "url": "https://justfacts.votesmart.org" }
+      ]
+    },
+    {
+      "id": "election-day",
+      "title": "Election Day",
+      "icon": "🗳️",
+      "shortDescription": "Cast your ballot on the first Tuesday after the first Monday in November",
+      "description": "Election Day is when the majority of Americans head to the polls to cast their votes. While you're voting for a presidential candidate, you're technically voting for a slate of electors pledged to that candidate in the Electoral College.",
+      "steps": [
+        {
+          "title": "Know Your Polling Place",
+          "description": "Find your assigned polling location using your state's election website, Google Maps, or the Google Civic Information tool. Polling places are based on your registered address.",
+          "tip": "Visit your polling place before Election Day so you know exactly where to go."
+        },
+        {
+          "title": "Bring Required ID",
+          "description": "36 states require voters to show identification at the polls. Requirements range from strict photo ID to simply stating your name. Know your state's rules.",
+          "tip": "If you don't have proper ID, most states offer provisional ballots."
+        },
+        {
+          "title": "Cast Your Vote",
+          "description": "Enter the voting booth and mark your choices on the ballot. Depending on your state, you may use paper ballots, electronic machines, or a combination. Down-ballot races (Senate, House, local offices) are equally important.",
+          "tip": "You have the right to take as much time as you need in the voting booth."
+        },
+        {
+          "title": "Understand Your Rights",
+          "description": "You cannot be turned away if you're in line when polls close. You have the right to assistance if needed. You can report voting problems to the Election Protection Hotline (866-OUR-VOTE).",
+          "tip": "Employers in most states must provide time off for voting — check your state's laws."
+        }
+      ],
+      "keyDates": {
+        "electionDay": "First Tuesday after the first Monday in November",
+        "pollHours": "Vary by state (typically 6:00 AM – 8:00 PM local time)"
+      },
+      "resources": [
+        { "name": "Find Your Polling Place (USA.gov)", "url": "https://www.usa.gov/election-day" },
+        { "name": "Election Protection Hotline", "url": "https://866ourvote.org" }
+      ]
+    },
+    {
+      "id": "electoral-college",
+      "title": "Electoral College",
+      "icon": "🏛️",
+      "shortDescription": "Electors officially cast votes for president",
+      "description": "The Electoral College is the system established by the Constitution for electing the president. Each state has a number of electors equal to its total congressional representation (House + Senate). There are 538 total electors; a candidate needs 270 to win.",
+      "steps": [
+        {
+          "title": "Electors Are Chosen",
+          "description": "Each state's winning candidate receives all of that state's electoral votes (except Maine and Nebraska, which use a congressional district method). Electors are typically party loyalists chosen by each party.",
+          "tip": "The winner-take-all system means a candidate can win the presidency without winning the popular vote."
+        },
+        {
+          "title": "Electors Meet and Vote",
+          "description": "On the first Tuesday after the second Wednesday in December, electors meet in their respective state capitals to cast their official votes for president and vice president.",
+          "tip": "'Faithless electors' who vote against their pledge are rare and are now penalized in most states."
+        },
+        {
+          "title": "Votes Certified",
+          "description": "Each state's governor prepares a Certificate of Ascertainment listing the electors and vote counts, which is sent to Congress and the National Archives.",
+          "tip": "This process is governed by the Electoral Count Reform Act (2022)."
+        },
+        {
+          "title": "Congressional Certification",
+          "description": "On January 6, Congress meets in a joint session to officially count and certify the electoral votes. The Vice President presides over this session.",
+          "tip": "This was historically ceremonial but gained public attention after the events of January 6, 2021."
+        }
+      ],
+      "keyDates": {
+        "electorsMeet": "First Tuesday after the second Wednesday in December",
+        "congressionalCount": "January 6",
+        "totalElectors": "538",
+        "neededToWin": "270"
+      },
+      "resources": [
+        { "name": "National Archives – Electoral College", "url": "https://www.archives.gov/electoral-college" },
+        { "name": "270toWin", "url": "https://www.270towin.com" }
+      ]
+    },
+    {
+      "id": "inauguration",
+      "title": "Inauguration",
+      "icon": "🎖️",
+      "shortDescription": "The president-elect is sworn into office",
+      "description": "Inauguration Day marks the formal beginning of a new presidential term. The president-elect takes the oath of office, traditionally administered by the Chief Justice of the Supreme Court, and becomes the President of the United States.",
+      "steps": [
+        {
+          "title": "Oath of Office",
+          "description": "At noon on January 20, the president-elect recites the oath of office as prescribed in Article II of the Constitution: 'I do solemnly swear that I will faithfully execute the Office of President of the United States...'",
+          "tip": "The 20th Amendment established January 20 as Inauguration Day, starting in 1937."
+        },
+        {
+          "title": "Inaugural Address",
+          "description": "The newly sworn president delivers an inaugural address, setting the tone and priorities for their administration. This speech is one of the most watched political events globally.",
+          "tip": "The shortest inaugural address was George Washington's second (135 words); the longest was William Henry Harrison's (8,445 words)."
+        },
+        {
+          "title": "Transfer of Power",
+          "description": "The peaceful transfer of power is a cornerstone of American democracy. The outgoing president vacates the White House, and the new president begins their term immediately.",
+          "tip": "The 'nuclear football' — the briefcase containing nuclear launch codes — transfers to the new president at noon."
+        },
+        {
+          "title": "Inaugural Celebrations",
+          "description": "Following the ceremony, inaugural parades, balls, and celebrations take place throughout Washington, D.C. These events welcome the new administration.",
+          "tip": "The inaugural parade route runs from the Capitol to the White House along Pennsylvania Avenue."
+        }
+      ],
+      "keyDates": {
+        "inaugurationDay": "January 20 following the election year",
+        "time": "Noon Eastern Time"
+      },
+      "resources": [
+        { "name": "Joint Congressional Committee on Inaugural Ceremonies", "url": "https://www.inaugural.senate.gov" },
+        { "name": "White House History", "url": "https://www.whitehousehistory.org" }
+      ]
+    }
+  ]
+}

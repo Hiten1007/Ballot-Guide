@@ -1,0 +1,88 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "How many electors make up the Electoral College?",
+      "options": ["270", "435", "538", "100"],
+      "correctIndex": 2,
+      "explanation": "There are 538 electors — one for each member of Congress (435 House + 100 Senate) plus 3 for Washington, D.C."
+    },
+    {
+      "id": 2,
+      "question": "How many electoral votes does a candidate need to win the presidency?",
+      "options": ["200", "270", "300", "538"],
+      "correctIndex": 1,
+      "explanation": "A candidate needs a simple majority of 270 out of 538 electoral votes to win."
+    },
+    {
+      "id": 3,
+      "question": "When is Election Day in the United States?",
+      "options": ["First Monday in November", "First Tuesday after the first Monday in November", "November 1st", "Last Tuesday in October"],
+      "correctIndex": 1,
+      "explanation": "By federal law, Election Day is the Tuesday following the first Monday in November."
+    },
+    {
+      "id": 4,
+      "question": "What is a caucus?",
+      "options": ["A type of ballot", "A party meeting where members discuss and vote", "A federal election committee", "A debate format"],
+      "correctIndex": 1,
+      "explanation": "A caucus is a meeting of political party members where they openly discuss candidates and vote."
+    },
+    {
+      "id": 5,
+      "question": "What is the minimum voting age in the United States?",
+      "options": ["16", "17", "18", "21"],
+      "correctIndex": 2,
+      "explanation": "The 26th Amendment sets the minimum voting age at 18."
+    },
+    {
+      "id": 6,
+      "question": "What is gerrymandering?",
+      "options": ["Voter registration fraud", "Manipulating district boundaries for political advantage", "A type of voting machine", "A campaign finance strategy"],
+      "correctIndex": 1,
+      "explanation": "Gerrymandering is the practice of drawing electoral districts to benefit a specific party."
+    },
+    {
+      "id": 7,
+      "question": "When is Inauguration Day?",
+      "options": ["January 6", "January 20", "February 1", "December 20"],
+      "correctIndex": 1,
+      "explanation": "Since the 20th Amendment (1937), Inauguration Day is January 20."
+    },
+    {
+      "id": 8,
+      "question": "What is Super Tuesday?",
+      "options": ["Election Day", "The day with the most simultaneous state primaries", "The day electors vote", "The day Congress certifies results"],
+      "correctIndex": 1,
+      "explanation": "Super Tuesday is when the largest number of states hold primary elections on the same day."
+    },
+    {
+      "id": 9,
+      "question": "Which two states do NOT use a winner-take-all system for electoral votes?",
+      "options": ["Texas and California", "Maine and Nebraska", "Florida and Ohio", "New York and Pennsylvania"],
+      "correctIndex": 1,
+      "explanation": "Maine and Nebraska use a congressional district method, allocating electoral votes by district."
+    },
+    {
+      "id": 10,
+      "question": "What is a provisional ballot?",
+      "options": ["A ballot for overseas voters", "A ballot cast when voter eligibility is uncertain", "A ballot used in primaries only", "A pre-election test ballot"],
+      "correctIndex": 1,
+      "explanation": "Provisional ballots are cast when there are questions about a voter's eligibility and counted after verification."
+    },
+    {
+      "id": 11,
+      "question": "Which amendment gave women the right to vote?",
+      "options": ["15th Amendment", "19th Amendment", "21st Amendment", "26th Amendment"],
+      "correctIndex": 1,
+      "explanation": "The 19th Amendment, ratified in 1920, prohibited denying the right to vote based on sex."
+    },
+    {
+      "id": 12,
+      "question": "What does a 'swing state' refer to?",
+      "options": ["A state that always votes Democratic", "A state where either party could win", "A state with the most electoral votes", "A state that votes last"],
+      "correctIndex": 1,
+      "explanation": "Swing states are competitive states where the outcome is uncertain and campaigns focus their efforts."
+    }
+  ]
+}
