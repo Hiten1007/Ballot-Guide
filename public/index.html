@@ -42,7 +42,18 @@
             <button class="btn btn--primary" id="hero-start-btn" aria-label="Start learning about the election process">📚 Start Learning</button>
             <button class="btn btn--secondary" id="hero-quiz-btn" aria-label="Test your election knowledge">🧠 Take the Quiz</button>
           </div>
+          <div class="hero__progress" id="progress-badge" style="display:none" aria-label="Your learning progress"></div>
         </section>
+
+        <!-- Election Countdown -->
+        <section class="section" aria-label="Election Countdown">
+          <div class="container">
+            <div id="countdown-widget" class="countdown-widget"></div>
+          </div>
+        </section>
+
+        <!-- Did You Know? -->
+        <div id="did-you-know" style="display:none" class="container" aria-label="Fun election fact"></div>
 
         <!-- Feature Cards -->
         <section class="section" aria-label="Features">
@@ -83,6 +94,7 @@
                 <p class="card__text">Listen to content read aloud with Google Cloud TTS for enhanced accessibility.</p>
               </div>
             </div>
+            <p class="section__hint" aria-label="Keyboard shortcut hint">💡 Press <kbd>?</kbd> for keyboard shortcuts</p>
           </div>
         </section>
       </div>

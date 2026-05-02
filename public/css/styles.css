@@ -212,6 +212,37 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ── Countdown Widget ──────────────────────────────────────── */
+.countdown-widget{animation:fadeInUp .6s ease .4s both}
+.countdown__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;text-align:center}
+.countdown__item{padding:24px 16px;border-radius:var(--radius-lg);background:var(--bg-card);border:1px solid var(--border-glass);backdrop-filter:blur(12px);transition:all var(--transition)}
+.countdown__item:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 32px rgba(99,102,241,0.15)}
+.countdown__number{font-family:var(--font-display);font-size:2.5rem;font-weight:800;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+.countdown__label{color:var(--text-secondary);font-size:.8rem;margin-top:4px;font-weight:500}
+
+/* ── Fact Card ──────────────────────────────────────────────── */
+.fact-card{display:flex;gap:16px;padding:20px 24px;border-radius:var(--radius-lg);background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);margin:0 auto 32px;max-width:800px;animation:fadeIn .5s ease}
+.fact-card__icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.fact-card strong{color:var(--warning);font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+.fact-card p{color:var(--text-secondary);font-size:.9rem;line-height:1.6;margin-top:4px}
+
+/* ── Progress Badge ────────────────────────────────────────── */
+.hero__progress{margin-top:24px;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:var(--success);font-size:.85rem;font-weight:500;animation:fadeIn .6s ease}
+.progress-ring{display:inline-block;width:24px;height:24px;border-radius:50%;background:conic-gradient(var(--success) calc(var(--pct) * 1%),var(--border-glass) 0);position:relative}
+.progress-ring::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--bg-primary)}
+
+/* ── Section Hint ──────────────────────────────────────────── */
+.section__hint{text-align:center;color:var(--text-muted);font-size:.8rem;margin-top:32px}
+.section__hint kbd{padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border-glass);font-family:var(--font-sans);font-size:.75rem;color:var(--text-secondary)}
+
+/* ── Keyboard Help Overlay ─────────────────────────────────── */
+.keyboard-help{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:grid;place-items:center;animation:fadeIn .2s ease}
+.keyboard-help__inner{background:var(--bg-secondary);border:1px solid var(--border-glass);border-radius:var(--radius-xl);padding:32px;max-width:360px;width:90%;text-align:center}
+.keyboard-help__inner h3{margin-bottom:20px;font-size:1.1rem}
+.keyboard-help__grid{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;text-align:left;margin-bottom:24px}
+.keyboard-help__grid kbd{padding:4px 12px;border-radius:6px;background:var(--bg-glass);border:1px solid var(--border-glass);font-family:var(--font-sans);font-size:.85rem;font-weight:600;color:var(--accent-light);text-align:center}
+.keyboard-help__grid span{color:var(--text-secondary);font-size:.9rem;display:flex;align-items:center}
+
 /* ── Responsive ─────────────────────────────────────────────── */
 @media(max-width:768px){
   .hamburger{display:block}
@@ -221,6 +252,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .chat-panel{width:calc(100vw - 16px);right:8px;bottom:8px;height:60vh}
   .glossary__grid{grid-template-columns:1fr}
   .voter-info__search{flex-direction:column}
+  .countdown__grid{grid-template-columns:repeat(2,1fr)}
 }
 
 /* ── Focus Visible ──────────────────────────────────────────── */

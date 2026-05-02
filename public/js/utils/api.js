@@ -84,6 +84,12 @@ const BallotAPI = {
       body: JSON.stringify({ text, languageCode }),
     }),
 
+  /** Random election fact */
+  getRandomFact: () => apiFetch('/election/fact'),
+
+  /** Election countdown data */
+  getCountdown: () => apiFetch('/election/countdown'),
+
   /** Health check */
   health: () => apiFetch('/health'),
 };

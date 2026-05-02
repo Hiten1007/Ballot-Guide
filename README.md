@@ -5,7 +5,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=node.js)
 ![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express)
 ![Google AI](https://img.shields.io/badge/Google_Gemini-2.5_Flash-4285F4?logo=google)
-![Tests](https://img.shields.io/badge/Tests-89%20Passed-10b981)
+![Tests](https://img.shields.io/badge/Tests-102%20Passed-10b981)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ---
@@ -65,6 +65,8 @@ User Input → Sanitisation → Context Analysis → AI Processing → Response 
 - **Conversation Memory**: The last 10 conversation turns are maintained for multi-turn dialogue, enabling follow-up questions.
 - **Guardrail System Prompt**: The AI is constrained to election/civic topics only and explicitly prohibited from expressing political opinions.
 - **Server-Side Answer Validation**: Quiz answers are validated on the server to prevent client-side cheating, with explanations served only after an answer is submitted.
+- **Progress Tracking**: localStorage-based tracking of phases viewed, quiz scores, and visit history for personalised UX.
+- **Request Correlation**: Every request receives a unique UUID (`X-Request-Id`) for distributed tracing and debugging.
 
 ---
 
@@ -191,6 +193,10 @@ User Input → Sanitisation → Context Analysis → AI Processing → Response 
 - **Knowledge Quiz** — 12-question quiz with server-side validation and explanations
 - **Searchable Glossary** — 33 key election terms with debounced search
 - **Voter Information Lookup** — Real polling locations and ballot data via Civic API
+- **Election Countdown** — Live countdown to Election Day, primaries, and inauguration
+- **"Did You Know?" Facts** — 15 curated election facts for engagement
+- **Progress Tracking** — localStorage tracks phases viewed and quiz scores
+- **Keyboard Shortcuts** — Full keyboard navigation (press `?` for help)
 
 ### Accessibility Features
 - **Multi-Language Support** — Content translation via Google Translate (13+ languages)
@@ -209,6 +215,9 @@ User Input → Sanitisation → Context Analysis → AI Processing → Response 
 - **HPP** — HTTP Parameter Pollution prevention
 - **Rate Limiting** — Global (100 req/15min) + strict AI endpoint (10 req/min)
 - **Input Sanitisation** — HTML stripping, address validation, length limits
+- **Request Correlation IDs** — UUID per request with `X-Request-Id` header
+- **Response Timing** — `X-Response-Time` header for performance monitoring
+- **Proxy Trust** — Proper `trust proxy` configuration for accurate IP behind reverse proxies
 - **Environment Variables** — No hardcoded secrets; `.env.example` template provided
 
 ---
@@ -249,12 +258,13 @@ BallotGuide/
 │   ├── middleware/
 │   │   ├── errorHandler.js           # Global error handler + 404
 │   │   ├── rateLimiter.js            # Dual-tier rate limiting
+│   │   ├── requestId.js              # Request correlation IDs + timing
 │   │   ├── security.js               # Helmet + CORS + HPP + compression
 │   │   └── validator.js              # Request validation (chat, address, translate, TTS)
 │   ├── routes/
 │   │   ├── index.js                  # Route aggregator + health check
 │   │   ├── assistantRoutes.js        # AI chat + suggestions
-│   │   ├── electionRoutes.js         # Process, glossary, quiz
+│   │   ├── electionRoutes.js         # Process, glossary, quiz, facts, countdown
 │   │   ├── civicRoutes.js            # Google Civic API proxy
 │   │   └── accessibilityRoutes.js    # Translate + TTS
 │   ├── services/
@@ -270,14 +280,15 @@ BallotGuide/
 │   └── data/
 │       ├── electionProcess.json      # 7 phases, 30+ steps, tips, dates
 │       ├── glossary.json             # 33 election terms
-│       └── quizQuestions.json        # 12 quiz questions with explanations
+│       ├── quizQuestions.json        # 12 quiz questions with explanations
+│       └── electionFacts.json        # 15 curated "Did You Know?" facts
 │
 ├── public/                           # Frontend static assets
 │   ├── index.html                    # Semantic HTML5 with ARIA
 │   ├── css/
 │   │   └── styles.css                # Design system (dark mode, glassmorphism)
 │   └── js/
-│       ├── app.js                    # SPA router and initialisation
+│       ├── app.js                    # SPA router, progress tracking, shortcuts
 │       ├── utils/
 │       │   ├── api.js                # Centralised API client
 │       │   └── dom.js                # DOM utilities + markdown parser
@@ -288,7 +299,7 @@ BallotGuide/
 │           ├── glossary.js           # Searchable glossary
 │           └── voterInfo.js          # Civic API voter lookup
 │
-└── tests/                            # Test suite (89 tests)
+└── tests/                            # Test suite (102 tests)
     ├── unit/
     │   ├── services/
     │   │   ├── electionDataService.test.js   # 15 tests
@@ -297,7 +308,9 @@ BallotGuide/
     │   │   ├── translateService.test.js      # 4 tests
     │   │   └── ttsService.test.js            # 3 tests
     │   ├── middleware/
-    │   │   └── validator.test.js             # 11 tests
+    │   │   ├── validator.test.js             # 11 tests
+    │   │   ├── requestId.test.js             # 4 tests
+    │   │   └── errorHandler.test.js          # 4 tests
     │   └── utils/
     │       ├── sanitizer.test.js             # 11 tests
     │       └── responseFormatter.test.js     # 5 tests
@@ -398,6 +411,8 @@ All endpoints return a consistent envelope:
 | `GET` | `/api/election/glossary?q=` | Searchable glossary |
 | `GET` | `/api/election/quiz?count=&shuffle=` | Quiz questions (answers stripped) |
 | `POST` | `/api/election/quiz/validate` | Server-side answer validation |
+| `GET` | `/api/election/fact` | Random "Did You Know?" election fact |
+| `GET` | `/api/election/countdown` | Countdown to next election milestones |
 | `GET` | `/api/civic/elections` | Live election data |
 | `GET` | `/api/civic/voterinfo?address=` | Voter info for an address |
 | `GET` | `/api/civic/divisions?q=` | Political division search |
@@ -409,19 +424,21 @@ All endpoints return a consistent envelope:
 
 ## 🧪 Testing
 
-### Test Results: **89 Tests, 10 Suites, 100% Pass Rate**
+### Test Results: **102 Tests, 12 Suites, 100% Pass Rate**
 
 | Suite | Tests | Coverage Area |
 |-------|-------|--------------|
-| `electionDataService.test.js` | 15 | Data access, caching, search, quiz validation |
+| `electionDataService.test.js` | 15 | Data access, caching, search, quiz validation, facts, countdown |
 | `geminiService.test.js` | 9 | AI chat, conversation history, suggestions, error handling |
 | `civicService.test.js` | 7 | Elections, voter info, divisions, API error handling |
 | `translateService.test.js` | 4 | Translation, supported languages, fallback |
 | `ttsService.test.js` | 3 | Speech synthesis, request body, API errors |
 | `validator.test.js` | 11 | Input validation, sanitisation, length limits |
+| `requestId.test.js` | 4 | Correlation ID generation, header propagation |
+| `errorHandler.test.js` | 4 | Error codes, production mode, 404 handling |
 | `sanitizer.test.js` | 11 | XSS prevention, HTML stripping, address cleaning |
 | `responseFormatter.test.js` | 5 | API envelope formatting |
-| `election.test.js` | 13 | Full API integration (process, glossary, quiz) |
+| `election.test.js` | 18 | Full API integration (process, glossary, quiz, facts, countdown) |
 | `accessibility.test.js` | 11 | ARIA, security headers, HTML structure, SEO |
 
 ### Test Strategy

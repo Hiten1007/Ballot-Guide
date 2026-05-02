@@ -108,5 +108,49 @@ describe('Election API', () => {
       expect(res.body.data.status).toBe('healthy');
       expect(res.body.data.uptime).toBeGreaterThan(0);
     });
+
+    it('includes X-Request-Id header in response', async () => {
+      const res = await request(app).get('/api/health');
+      expect(res.headers['x-request-id']).toBeDefined();
+      expect(res.headers['x-request-id']).toMatch(/^[0-9a-f-]{36}$/);
+    });
+  });
+
+  describe('GET /api/election/fact', () => {
+    it('returns a random election fact', async () => {
+      const res = await request(app).get('/api/election/fact');
+      expect(res.status).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(res.body.data.fact).toBeTruthy();
+      expect(res.body.data.category).toBeTruthy();
+    });
+
+    it('returns different facts on multiple calls', async () => {
+      const facts = new Set();
+      for (let i = 0; i < 10; i++) {
+        const res = await request(app).get('/api/election/fact');
+        facts.add(res.body.data.fact);
+      }
+      /* With 15 facts and 10 calls, probability of all same is negligible */
+      expect(facts.size).toBeGreaterThan(1);
+    });
+  });
+
+  describe('GET /api/election/countdown', () => {
+    it('returns countdown data with correct structure', async () => {
+      const res = await request(app).get('/api/election/countdown');
+      expect(res.status).toBe(200);
+      expect(res.body.data.nextElectionYear).toBeGreaterThanOrEqual(2026);
+      expect(res.body.data.electionDay).toHaveProperty('date');
+      expect(res.body.data.electionDay).toHaveProperty('daysUntil');
+      expect(res.body.data.inaugurationDay).toHaveProperty('date');
+      expect(res.body.data.primarySeason).toHaveProperty('date');
+    });
+
+    it('returns non-negative day counts', async () => {
+      const res = await request(app).get('/api/election/countdown');
+      expect(res.body.data.electionDay.daysUntil).toBeGreaterThanOrEqual(0);
+      expect(res.body.data.inaugurationDay.daysUntil).toBeGreaterThanOrEqual(0);
+    });
   });
 });
