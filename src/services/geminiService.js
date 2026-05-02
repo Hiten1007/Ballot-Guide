@@ -45,7 +45,7 @@ function getClient() {
 /**
  * Sends a message to Gemini and returns the AI response.
  * @param {string} message - The user's question or message.
- * @param {Array<Object>} [conversationHistory=[]] - Prior conversation turns.
+ * @param {Array<object>} [conversationHistory] - Prior conversation turns.
  * @param {string} [context] - Optional additional context (e.g., current page).
  * @returns {Promise<string>} The AI-generated response text.
  * @throws {Error} If the API call fails.

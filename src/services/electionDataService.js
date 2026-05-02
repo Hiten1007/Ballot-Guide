@@ -14,22 +14,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DATA_DIR = join(__dirname, '..', 'data');
 
-/** @type {Object|null} Cached election process data */
+/** @type {object | null} Cached election process data */
 let processCache = null;
 
-/** @type {Object|null} Cached glossary data */
+/** @type {object | null} Cached glossary data */
 let glossaryCache = null;
 
-/** @type {Object|null} Cached quiz data */
+/** @type {object | null} Cached quiz data */
 let quizCache = null;
 
-/** @type {Object|null} Cached facts data */
+/** @type {object | null} Cached facts data */
 let factsCache = null;
 
 /**
  * Loads and caches a JSON file from the data directory.
  * @param {string} filename - Name of the JSON file.
- * @returns {Promise<Object>} Parsed JSON data.
+ * @returns {Promise<object>} Parsed JSON data.
  */
 async function loadDataFile(filename) {
   const filePath = join(DATA_DIR, filename);
@@ -54,7 +54,7 @@ export async function getElectionProcess() {
 /**
  * Returns a specific election process phase by ID.
  * @param {string} phaseId - The phase identifier (e.g., "voter-registration").
- * @returns {Promise<Object|null>} The matching phase or null.
+ * @returns {Promise<object | null>} The matching phase or null.
  */
 export async function getPhaseById(phaseId) {
   const phases = await getElectionProcess();
@@ -63,7 +63,7 @@ export async function getPhaseById(phaseId) {
 
 /**
  * Returns all glossary terms, optionally filtered by search query.
- * @param {string} [searchQuery=''] - Optional search string.
+ * @param {string} [searchQuery] - Optional search string.
  * @returns {Promise<Array>} Filtered array of glossary term objects.
  */
 export async function getGlossary(searchQuery = '') {
@@ -89,7 +89,7 @@ export async function getGlossary(searchQuery = '') {
 /**
  * Returns quiz questions, optionally randomised and limited.
  * @param {number} [count] - Number of questions to return.
- * @param {boolean} [shuffle=false] - Whether to randomise order.
+ * @param {boolean} [shuffle] - Whether to randomise order.
  * @returns {Promise<Array>} Array of quiz question objects.
  */
 export async function getQuizQuestions(count, shuffle = false) {
@@ -121,7 +121,7 @@ export async function getQuizQuestions(count, shuffle = false) {
  * Validates a quiz answer.
  * @param {number} questionId - The question ID.
  * @param {number} selectedIndex - The selected answer index.
- * @returns {Promise<Object>} Validation result with correctness and explanation.
+ * @returns {Promise<object>} Validation result with correctness and explanation.
  */
 export async function validateAnswer(questionId, selectedIndex) {
   const questions = await getQuizQuestions();
@@ -143,7 +143,7 @@ export async function validateAnswer(questionId, selectedIndex) {
 
 /**
  * Returns a random election fact for the "Did You Know?" feature.
- * @returns {Promise<Object>} A random fact object with `fact` and `category`.
+ * @returns {Promise<object>} A random fact object with `fact` and `category`.
  */
 export async function getRandomFact() {
   if (!factsCache) {
@@ -156,7 +156,7 @@ export async function getRandomFact() {
 
 /**
  * Returns election countdown data.
- * @returns {Object} Countdown object with days until next major dates.
+ * @returns {object} Countdown object with days until next major dates.
  */
 export function getElectionCountdown() {
   const now = new Date();
