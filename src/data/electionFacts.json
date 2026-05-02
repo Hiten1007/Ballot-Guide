@@ -1,0 +1,64 @@
+{
+  "facts": [
+    {
+      "fact": "The first US presidential election was held in 1789, and George Washington ran unopposed.",
+      "category": "history"
+    },
+    {
+      "fact": "Wyoming was the first state to grant women the right to vote in 1869 — 51 years before the 19th Amendment.",
+      "category": "history"
+    },
+    {
+      "fact": "The Electoral College has 538 electors — equal to 435 House members + 100 Senators + 3 for Washington D.C.",
+      "category": "electoral-college"
+    },
+    {
+      "fact": "Five presidents have won the presidency while losing the popular vote: J.Q. Adams, Hayes, Harrison, Bush (2000), and Trump (2016).",
+      "category": "electoral-college"
+    },
+    {
+      "fact": "The 26th Amendment lowered the voting age from 21 to 18 in 1971, largely driven by the Vietnam War era.",
+      "category": "voting-rights"
+    },
+    {
+      "fact": "In the 2020 election, over 159 million Americans voted — the highest turnout rate since 1900.",
+      "category": "turnout"
+    },
+    {
+      "fact": "Maine and Nebraska are the only states that don't use a winner-take-all system for electoral votes.",
+      "category": "electoral-college"
+    },
+    {
+      "fact": "The longest presidential inauguration speech was William Henry Harrison's at 8,445 words — he died 31 days later.",
+      "category": "inauguration"
+    },
+    {
+      "fact": "Early voting has grown dramatically — in 2020, over 101 million people voted before Election Day.",
+      "category": "voting"
+    },
+    {
+      "fact": "The US is one of the few democracies where voter registration is not automatic — citizens must actively register.",
+      "category": "registration"
+    },
+    {
+      "fact": "The 'I Voted' sticker tradition began in the 1980s as a way to encourage voter turnout through social pressure.",
+      "category": "culture"
+    },
+    {
+      "fact": "Super Tuesday got its name in the 1980s — it's when the most states hold primaries on a single day.",
+      "category": "primaries"
+    },
+    {
+      "fact": "The presidential debates weren't a regular feature until 1976 — the first televised one was Kennedy vs. Nixon in 1960.",
+      "category": "campaign"
+    },
+    {
+      "fact": "The 20th Amendment moved Inauguration Day from March 4 to January 20, starting in 1937.",
+      "category": "inauguration"
+    },
+    {
+      "fact": "Ranked-choice voting is used in Alaska, Maine, and several cities — voters rank candidates by preference.",
+      "category": "voting"
+    }
+  ]
+}

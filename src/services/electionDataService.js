@@ -23,6 +23,9 @@ let glossaryCache = null;
 /** @type {Object|null} Cached quiz data */
 let quizCache = null;
 
+/** @type {Object|null} Cached facts data */
+let factsCache = null;
+
 /**
  * Loads and caches a JSON file from the data directory.
  * @param {string} filename - Name of the JSON file.
@@ -139,12 +142,56 @@ export async function validateAnswer(questionId, selectedIndex) {
 }
 
 /**
+ * Returns a random election fact for the "Did You Know?" feature.
+ * @returns {Promise<Object>} A random fact object with `fact` and `category`.
+ */
+export async function getRandomFact() {
+  if (!factsCache) {
+    factsCache = await loadDataFile('electionFacts.json');
+    logger.debug('Facts data loaded', { factCount: factsCache.facts?.length });
+  }
+  const facts = factsCache.facts;
+  return facts[Math.floor(Math.random() * facts.length)];
+}
+
+/**
+ * Returns election countdown data.
+ * @returns {Object} Countdown object with days until next major dates.
+ */
+export function getElectionCountdown() {
+  const now = new Date();
+  const currentYear = now.getFullYear();
+
+  /* Next presidential election is always the next year divisible by 4 */
+  const nextElectionYear = currentYear + (4 - (currentYear % 4)) % 4 || currentYear;
+  const electionDay = new Date(`${nextElectionYear}-11-03T00:00:00`);
+  const inaugurationDay = new Date(`${nextElectionYear + 1}-01-20T00:00:00`);
+
+  /* Approximate primary season start (Feb of election year) */
+  const primaryStart = new Date(`${nextElectionYear}-02-01T00:00:00`);
+
+  /** @param {Date} target */
+  const daysUntil = (target) => {
+    const diff = target.getTime() - now.getTime();
+    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+  };
+
+  return {
+    nextElectionYear,
+    electionDay: { date: electionDay.toISOString().split('T')[0], daysUntil: daysUntil(electionDay) },
+    inaugurationDay: { date: inaugurationDay.toISOString().split('T')[0], daysUntil: daysUntil(inaugurationDay) },
+    primarySeason: { date: primaryStart.toISOString().split('T')[0], daysUntil: daysUntil(primaryStart) },
+  };
+}
+
+/**
  * Clears all data caches (useful for testing).
  */
 export function clearCaches() {
   processCache = null;
   glossaryCache = null;
   quizCache = null;
+  factsCache = null;
 }
 
 export default {
@@ -153,5 +200,7 @@ export default {
   getGlossary,
   getQuizQuestions,
   validateAnswer,
+  getRandomFact,
+  getElectionCountdown,
   clearCaches,
 };

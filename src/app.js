@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createSecurityMiddleware } from './middleware/security.js';
 import { createGlobalLimiter } from './middleware/rateLimiter.js';
+import { requestIdMiddleware } from './middleware/requestId.js';
 import { globalErrorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import apiRoutes from './routes/index.js';
 import logger from './utils/logger.js';
@@ -24,6 +25,12 @@ const __dirname = dirname(__filename);
 export function createApp() {
   const app = express();
 
+  /* ── Trust proxy for accurate IP behind reverse proxies ───────── */
+  app.set('trust proxy', 1);
+
+  /* ── Request correlation ID + response timing ─────────────────── */
+  app.use(requestIdMiddleware);
+
   /* ── Security middleware ──────────────────────────────────────── */
   app.use(createSecurityMiddleware());
 
@@ -31,12 +38,26 @@ export function createApp() {
   app.use(express.json({ limit: '1mb' }));
   app.use(express.urlencoded({ extended: false, limit: '1mb' }));
 
-  /* ── Request logging ──────────────────────────────────────────── */
-  app.use((req, _res, next) => {
-    logger.debug(`${req.method} ${req.path}`, {
+  /* ── Request logging with correlation ID ──────────────────────── */
+  app.use((req, res, next) => {
+    const start = Date.now();
+
+    logger.debug(`→ ${req.method} ${req.path}`, {
+      requestId: req.id,
       ip: req.ip,
       userAgent: req.get('user-agent'),
     });
+
+    res.on('finish', () => {
+      const duration = Date.now() - start;
+      const level = res.statusCode >= 400 ? 'warn' : 'debug';
+      logger[level](`← ${req.method} ${req.path} ${res.statusCode} ${duration}ms`, {
+        requestId: req.id,
+        statusCode: res.statusCode,
+        duration,
+      });
+    });
+
     next();
   });
 
@@ -47,8 +68,9 @@ export function createApp() {
   app.use('/api', apiRoutes);
 
   /* ── Static files (frontend) ──────────────────────────────────── */
+  const isProduction = process.env.NODE_ENV === 'production';
   app.use(express.static(join(__dirname, '..', 'public'), {
-    maxAge: '1d',
+    maxAge: isProduction ? '1d' : 0,
     etag: true,
   }));
 

@@ -1,7 +1,8 @@
 /**
  * @module routes/electionRoutes
  * @description Express routes for election process education data.
- * Serves process phases, glossary terms, and quiz functionality.
+ * Serves process phases, glossary terms, quiz functionality,
+ * random facts, and election countdown data.
  */
 
 import { Router } from 'express';
@@ -11,6 +12,8 @@ import {
   getGlossary,
   getQuizQuestions,
   validateAnswer,
+  getRandomFact,
+  getElectionCountdown,
 } from '../services/electionDataService.js';
 import { successResponse, errorResponse } from '../utils/responseFormatter.js';
 import logger from '../utils/logger.js';
@@ -69,7 +72,7 @@ router.get('/glossary', async (req, res) => {
 
 /**
  * GET /api/election/quiz?count=<n>&shuffle=<bool>
- * Returns quiz questions.
+ * Returns quiz questions (answers stripped for client integrity).
  * @name GetQuiz
  */
 router.get('/quiz', async (req, res) => {
@@ -90,7 +93,7 @@ router.get('/quiz', async (req, res) => {
 
 /**
  * POST /api/election/quiz/validate
- * Validates a quiz answer.
+ * Server-side answer validation to prevent client cheating.
  * @name ValidateAnswer
  */
 router.post('/quiz/validate', async (req, res) => {
@@ -108,6 +111,36 @@ router.post('/quiz/validate', async (req, res) => {
   } catch (err) {
     logger.error('Error validating answer', { error: err.message });
     res.status(500).json(errorResponse(500, 'Failed to validate answer.'));
+  }
+});
+
+/**
+ * GET /api/election/fact
+ * Returns a random "Did You Know?" election fact for engagement.
+ * @name GetRandomFact
+ */
+router.get('/fact', async (_req, res) => {
+  try {
+    const fact = await getRandomFact();
+    res.json(successResponse(fact));
+  } catch (err) {
+    logger.error('Error fetching fact', { error: err.message });
+    res.status(500).json(errorResponse(500, 'Failed to load election fact.'));
+  }
+});
+
+/**
+ * GET /api/election/countdown
+ * Returns countdown data to the next election milestones.
+ * @name GetCountdown
+ */
+router.get('/countdown', (_req, res) => {
+  try {
+    const countdown = getElectionCountdown();
+    res.json(successResponse(countdown));
+  } catch (err) {
+    logger.error('Error calculating countdown', { error: err.message });
+    res.status(500).json(errorResponse(500, 'Failed to calculate election countdown.'));
   }
 });
 
